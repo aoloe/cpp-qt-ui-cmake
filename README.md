@@ -110,7 +110,7 @@ target_link_libraries(sample-app
 
 Open Qt Designer and create a new Main Window.
 
-![](assets/mainwindow.png)
+![](assets/mainwindow.png?width=300)
 
 Create an `ui` directory in your project and save the file as `ui/mainwindow.ui`.
 
