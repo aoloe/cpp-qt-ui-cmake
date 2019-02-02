@@ -18,6 +18,16 @@ Minimal UI application with Qt, Designer (.ui) and cmake
  
 ## Tutorial
 
+### Requirements
+
+On Ubuntu / Debian Linux you need
+
+- `build-essential`
+- `cmake` (>= 3.2),
+- `qtbase5-dev`
+- `qttools5-dev`
+- `qttools5-dev-tools`
+
 ### Setup the project
 
 Create a `src` directory.
@@ -30,7 +40,7 @@ int main()
 }
 ```
 
-Create a simple `CMakeLists.txt` file:
+Create a simple `CMakeLists.txt` file in the project's main directory:
 
 ```
 CMAKE_MINIMUM_REQUIRED(VERSION 3.2)
@@ -44,17 +54,25 @@ ADD_EXECUTABLE(sample-app
 )
 ```
 
-Create a `build` directory, `cd` into it and run:
+`build` directory in your projejct directory.
+
+Open a termain, `cd` into the build directory, and run:
 
 ```sh
 $ cmake ..
+$ make
 ```
 
 This will create the `sample-app` executable.
 
 ### Create a Qt Application
 
+In the `main()` function add 
 
+
+### Create _your_ application
+
+Create a _void_ application in the `src/sampleapp.h` and `src/sampleapp.cpp` files:
 
 ## Notes
 
