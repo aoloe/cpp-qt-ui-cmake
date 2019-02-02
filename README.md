@@ -63,7 +63,7 @@ $ cmake ..
 $ make
 ```
 
-This will create the `sample-app` executable.
+This will create the `sample-app` executable. You can run it with `./sample-app` and if everything is correct, it will silently run without any output.
 
 ### Create a Qt Application
 
