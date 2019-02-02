@@ -180,20 +180,69 @@ int main(int argc, char *argv[])
 }
 ```
 
-Finally, add the Main Window files to _executable_ section of the `CMakeLists.txt` file:
+Finally, add the Main Window files to the  _executable_ section of the `CMakeLists.txt` file:
 
 ```CMake
 add_executable(sample-app
-    src/main.cpp,
+    src/main.cpp
     src/mainwindow.cpp
 )
 ```
 
-### Create _your_ application
+FAQ:
+
+- why `namespace Ui {}`: forward declration of the MainWindow class in the Ui namespace.
+- `class MainWindow : public QMainWindow`: MainWindow inherits all behaviors of the QMainWindow class.
+- `Q_OBJECT`: a macro that sets up the class for being using inside of the Qt framework.
+- There is some magic going on: QApplication will discover by itself that you have created a `QMainWindow`.
+
+### Create _your_ Application
 
 Generally, speaking it's not a good practice to put too much logic in the `main.cpp` or in the `MainWindow`.
 
-Create a _void_ application in the `src/sampleapp.h` and `src/sampleapp.cpp` files:
+For now, we don't have any logic, but we can already create an empty application in the `src/sampleapp.h` and `src/sampleapp.cpp` files:
+
+`sampleapp.h`
+
+```cpp
+#ifndef SAMPLEAPP_H
+#define SAMPLEAPP_H
+
+#include<QApplication>
+
+class SampleApp : public QApplication
+{
+    Q_OBJECT
+    public:
+        explicit SampleApp(int &argc, char *argv[]);
+};
+#endif
+```
+
+```cpp
+SampleApp::SampleApp(int &argc, char *argv[]) :
+    QApplication(argc, argv)
+{
+    setApplicationName("Sample App");
+    setApplicationVersion("0.1");
+}
+```
+
+Edit `main.cpp` to use `SampleApp` instead of `QApplication`:
+
+- include `#include "src/sampleapp.h"` instead of `#include <QApplication>`
+- create `app` as a `SampleApp`, instead of a `QApplication`:  
+  `SampleApp app(argc, argv);`
+
+Finally, add the SampleApp files to the _executable_ section of the `CMakeLists.txt` file:
+
+```CMake
+add_executable(sample-app
+    src/main.cpp
+    src/sampleapp.cpp
+    src/mainwindow.cpp
+)
+```
 
 ## Notes
 
