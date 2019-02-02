@@ -127,17 +127,17 @@ Those file will _load_ the `mainwindow.ui` file behind the scene.
 #include <QMainWindow>
 
 namespace Ui {
-	class MainWindow;
+    class MainWindow;
 }
 
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-	explicit MainWindow(QWidget *parent = 0);
+    explicit MainWindow(QWidget *parent = 0);
     ~MainWindow() override;
 private:
-	Ui::MainWindow *ui;
+    Ui::MainWindow *ui;
 };
 #endif
 ```
@@ -154,7 +154,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-	ui->setupUi(this);
+    ui->setupUi(this);
 }
 
 MainWindow::~MainWindow()
@@ -220,6 +220,8 @@ class SampleApp : public QApplication
 ```
 
 ```cpp
+#include "sampleapp.h"
+
 SampleApp::SampleApp(int &argc, char *argv[]) :
     QApplication(argc, argv)
 {
