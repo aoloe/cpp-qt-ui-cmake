@@ -42,7 +42,7 @@ int main()
 
 Create a simple `CMakeLists.txt` file in the project's main directory:
 
-```
+```CMake
 CMAKE_MINIMUM_REQUIRED(VERSION 3.2)
 
 PROJECT(sample-app)
@@ -54,9 +54,9 @@ ADD_EXECUTABLE(sample-app
 )
 ```
 
-`build` directory in your projejct directory.
+Create a `build` directory in your projejct directory.
 
-Open a termain, `cd` into the build directory, and run:
+Open a terminal, `cd` into the build directory, and run:
 
 ```sh
 $ cmake ..
@@ -67,10 +67,54 @@ This will create the `sample-app` executable.
 
 ### Create a Qt Application
 
-In the `main()` function add 
+Edit `main.cpp` so that it creates a `QApplication`:
+
+```cpp
+#include <QApplication>
+
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+    return app.exec();
+}
+```
+
+Add to `CMakeLists.txt` the commands for working with the Qt framework. At the end it should look like this:
+
+```CMake
+CMAKE_MINIMUM_REQUIRED(VERSION 3.2)
+
+PROJECT(sample-app)
+
+SET(CMAKE_CXX_STANDARD 14)
+
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+set(CMAKE_AUTOMOC ON)
+
+find_package(Qt5Widgets)
+
+set(CMAKE_AUTOUIC ON)
+
+ADD_EXECUTABLE(sample-app
+    src/main.cpp
+)
+
+target_link_libraries(sample-app
+    Qt5::Widgets
+)
+```
+
+Now, when you run your `./sample-app`, the program will not automatically quit, but will wait for being quit. You can quit it by pressing `ctrl-c`.
+
+### Create a window
+
+
 
 
 ### Create _your_ application
+
+Generally, speaking it's not a good practice to put too much logic in the `main.cpp` or in the `MainWindow`.
 
 Create a _void_ application in the `src/sampleapp.h` and `src/sampleapp.cpp` files:
 
