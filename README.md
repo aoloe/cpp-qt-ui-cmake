@@ -15,6 +15,40 @@ Minimal UI application with Qt, Designer (.ui) and cmake
   - Add resources
 - high definition screen...
 - how to attach standard actions to actions defined in the designer's actions editor?
+ 
+## Tutorial
+
+### Setup the project
+
+Create an _empty_ `main.cpp`
+
+```cpp
+int main()
+{
+}
+```
+
+Create a simple `CMakeLists.txt` file:
+
+```
+CMAKE_MINIMUM_REQUIRED(VERSION 3.2)
+
+PROJECT(sample-app)
+
+SET(CMAKE_CXX_STANDARD 14)
+
+ADD_EXECUTABLE(sample-app
+    src/main.cpp
+)
+```
+
+Create a `build` directory, `cd` into it and run:
+
+```sh
+$ cmake ..
+```
+
+This will create the `sample-app` executable.
 
 ## Notes
 
