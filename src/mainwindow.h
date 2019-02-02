@@ -17,4 +17,3 @@ private:
 	Ui::MainWindow *ui;
 };
 #endif
-
