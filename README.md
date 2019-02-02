@@ -20,7 +20,9 @@ Minimal UI application with Qt, Designer (.ui) and cmake
 
 ### Setup the project
 
-Create an _empty_ `main.cpp`
+Create a `src` directory.
+
+Create an _empty_ `main.cpp` in the `src` directory:
 
 ```cpp
 int main()
@@ -49,6 +51,10 @@ $ cmake ..
 ```
 
 This will create the `sample-app` executable.
+
+### Create a Qt Application
+
+
 
 ## Notes
 
