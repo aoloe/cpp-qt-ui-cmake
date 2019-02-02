@@ -43,13 +43,13 @@ int main()
 Create a simple `CMakeLists.txt` file in the project's main directory:
 
 ```CMake
-CMAKE_MINIMUM_REQUIRED(VERSION 3.2)
+cmake_minimum_required(VERSION 3.2)
 
-PROJECT(sample-app)
+project(sample-app)
 
-SET(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 14)
 
-ADD_EXECUTABLE(sample-app
+add_executable(sample-app
     src/main.cpp
 )
 ```
@@ -82,21 +82,20 @@ int main(int argc, char *argv[])
 Add to `CMakeLists.txt` the commands for working with the Qt framework. At the end it should look like this:
 
 ```CMake
-CMAKE_MINIMUM_REQUIRED(VERSION 3.2)
+cmake_minimum_required(VERSION 3.2)
 
-PROJECT(sample-app)
+project(sample-app)
 
-SET(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 14)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
 
 find_package(Qt5Widgets)
 
-set(CMAKE_AUTOUIC ON)
-
-ADD_EXECUTABLE(sample-app
+add_executable(sample-app
     src/main.cpp
 )
 
@@ -105,12 +104,88 @@ target_link_libraries(sample-app
 )
 ```
 
-Now, when you run your `./sample-app`, the program will not automatically quit, but will wait for being quit. You can quit it by pressing `ctrl-c`.
+`make` it. Now, when you run your `./sample-app`, the program will not automatically quit, but will wait for being quit. You can quit it by pressing `ctrl-c`.
 
 ### Create a window
 
+Open Qt Designer and create a new Main Window.
 
+Create an `ui` directory in your project and save the file as `ui/mainwindow.ui`.
 
+In the `src` directory, add the `mainwindow.h` and `mainwindow.cpp` files.
+
+Those file will _load_ the `mainwindow.ui` file behind the scene.
+
+`mainwindow.h`
+
+```cpp
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+
+#include <QMainWindow>
+
+namespace Ui {
+	class MainWindow;
+}
+
+class MainWindow : public QMainWindow
+{
+    Q_OBJECT
+public:
+	explicit MainWindow(QWidget *parent = 0);
+    ~MainWindow() override;
+private:
+	Ui::MainWindow *ui;
+};
+#endif
+```
+
+`mainwindow.cpp`
+
+```cpp
+#include "mainwindow.h"
+#include "../ui/ui_mainwindow.h"
+
+#include <QtWidgets>
+
+MainWindow::MainWindow(QWidget *parent) :
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
+{
+	ui->setupUi(this);
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+```
+
+In `main.cpp`, _create_ the main window:
+
+```cpp
+#include <QApplication>
+#include "src/mainwindow.h"
+
+int main(int argc, char *argv[])
+{
+    QApplication app(argc, argv);
+
+    MainWindow main_window;
+    main_window.show();
+
+    return app.exec();
+}
+```
+
+Finally, add the Main Window files to _executable_ section of the `CMakeLists.txt` file:
+
+```CMake
+add_executable(sample-app
+    src/main.cpp,
+    src/mainwindow.cpp
+)
+```
 
 ### Create _your_ application
 
