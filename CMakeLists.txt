@@ -9,7 +9,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt5Widgets)
+find_package(Qt6Widgets)
 
 add_executable(sample-app
     src/main.cpp
@@ -18,5 +18,5 @@ add_executable(sample-app
 )
 
 target_link_libraries(sample-app
-    Qt5::Widgets
+    Qt6::Widgets
 )
